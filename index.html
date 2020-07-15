@@ -29,6 +29,11 @@
     <header class="jumbotron">
       <h1 class="display-3">Movie Search!</h1>
       <p class="lead">Type in a movie name into the input field and hit "Add a movie" <br>It will add a button that, once clicked, adds movie data to your screen.</p>
+
+      <audio controls>
+        <source src="./assets/bachata.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+      </audio>
     </header>
 
     <!-- Rendered buttons will get dumped here  -->
@@ -48,8 +53,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
     
-        var wowSound = new Audio("./assets/wow.mp3");
-
       // Initial array of movies
       var movies = ["The Matrix", "The Notebook", "Mr. Nobody", "The Lion King"];
 
@@ -96,7 +99,8 @@
           containerDiv.append(posterImg);
           // Puts the entire Movie above the previous movies.
           $("#movies-view").prepend(containerDiv);
-
+          var wowSound = new Audio("./assets/wow.mp3");
+            wowSound.play();
         });
 
       }
@@ -127,14 +131,14 @@
       // This function handles events where the add movie button is clicked
       $("#add-movie").on("click", function(event) {
         event.preventDefault();
+        
         // This line of code will grab the input from the textbox
         var movie = $("#movie-input").val().trim();
 
         if (movie === "" || movie === undefined) {
-          alert("That's not a movie...");
+          alert("Your input cannot be blank...");
           return;
         }
-        wowSound.play();
         var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
         // Creates AJAX call for the specific movie button being clicked
         $.ajax({
